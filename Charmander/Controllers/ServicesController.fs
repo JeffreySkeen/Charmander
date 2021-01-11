@@ -16,7 +16,7 @@ type ServicesController (logger : ILogger<ServicesController>) =
 
     let mockServices : Charmander.Services[] = 
         [|
-            for i in 0..19 ->
+            for i in 0..99 ->
                 {
                     ID = i
                     DateCreaated = DateTime.Now
