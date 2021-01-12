@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Compile Include="Services.fs" />
+    <Compile Include="Results\ResultBase.fs" />
+    <Compile Include="Results\Services\GetServicesResult.fs" />
     <Compile Include="Controllers/ServicesController.fs" />
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />

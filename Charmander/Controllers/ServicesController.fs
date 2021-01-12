@@ -8,6 +8,7 @@ open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
 open Charmander
 open Microsoft.AspNetCore.Cors
+open Charmander.Result
 
 [<ApiController>]
 [<Route("API/ServiceController")>]
@@ -32,8 +33,8 @@ type ServicesController (logger : ILogger<ServicesController>) =
     [<HttpGet>]
     [<Route("GetServices/{pageNumber}/{pageSize}")>]
     [<EnableCors("AllowAll")>]
-    member __.GetServices(pageNumber, pageSize) : Charmander.Services[] =
-        mockServices.Skip(pageNumber * pageSize).Take(pageSize).ToArray()
+    member __.GetServices(pageNumber, pageSize) : GetServicesResult =
+        new GetServicesResult(mockServices.Skip(pageNumber * pageSize).Take(pageSize).ToArray())      
 
     [<HttpGet>]
     [<Route("FindService/{serviceID}")>]
