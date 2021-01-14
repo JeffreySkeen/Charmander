@@ -4,6 +4,8 @@ open System
 open System.Collections.Generic
 open System.Linq
 open System.Threading.Tasks
+open System.Text.Json
+open System.Text.Json.Serialization
 open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
 open Charmander
@@ -20,8 +22,8 @@ type ServicesController (logger : ILogger<ServicesController>) =
             for i in 0..99 ->
                 {
                     ID = i
-                    DateCreaated = DateTime.Now
                     Description = String.Format("Service Number: {0}", i)
+                    DateCreaated = DateTime.Now
                 }
         |]
 
@@ -41,4 +43,14 @@ type ServicesController (logger : ILogger<ServicesController>) =
     [<EnableCors("AllowAll")>]
     member __.FindService(serviceID) : Charmander.Services = 
         mockServices.First(fun f -> f.ID.Equals(serviceID))
-        
+
+    [<HttpPost>]
+    [<Route("CreateService")>]
+    [<EnableCors("AllowAll")>]
+    member __.CreateService([<FromBody>] service : Charmander.Services) : Charmander.Services =
+        let rng = System.Random()
+        {
+            ID = rng.Next(100,200)
+            Description = service.Description
+            DateCreaated = service.DateCreaated
+        }

@@ -24,7 +24,7 @@ type Startup private () =
                 options.AddPolicy("AllowAll", fun builder ->
                     builder.AllowAnyHeader()
                            .AllowAnyOrigin()
-                           .WithMethods([|"POST, GET"|]) |> ignore)
+                           .WithMethods([|"GET";"POST"|]) |> ignore)
             )|>ignore
         services.AddControllers() |> ignore
 
